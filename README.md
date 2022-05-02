@@ -1,17 +1,13 @@
 # Проект: Место
 
-### Обзор
+Mesto - приложения для размещения фотографий.
 
-* Figma
-* Картинки
+## Технологии
 
-**Figma**
+1. HTML5
+2. CSS3
+3. RESPONSIVE AND ADAPTIVE DESIGN
+4. BEM Metotology (NESTED)
+5. JS
 
-* [Ссылка на макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
-
-**Картинки**
-
-Доставать картинки предстоит из Фигмы. Это расхожая практика, поэтому полезно потренироваться.
-Не забудьте [оптимизировать картинки](https://tinypng.com/), чтобы ваш сайт загружался быстрее.
-
-Удачи!
+Проект можно посмотреть по [ссылке](https://levovskiiy.github.io/mesto/)
