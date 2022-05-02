@@ -9,3 +9,12 @@
 /* ====== HEADER SECTION ====== */
 @import url("../blocks/header/header.css");
 /* ====== HEADER SECTION ====== */
+
+@import url("../blocks/profile/profile.css");
+@import url("../blocks/profile/__avatar/profile__avatar.css");
+@import url("../blocks/profile/__info/profile__info.css");
+@import url("../blocks/profile/__name/profile__name.css");
+@import url("../blocks/profile/__description/proifle__description.css");
+@import url("../blocks/profile/__profile-button/__profile-button.css");
+@import url("../blocks/profile/__profile-button/_operation/profile__button_operation_add.css");
+@import url("../blocks/profile/__profile-button/_operation/profile__button_operation_edit.css");
