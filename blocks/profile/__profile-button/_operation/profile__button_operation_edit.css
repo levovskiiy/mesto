@@ -9,3 +9,10 @@
   box-sizing: border-box;
   align-self: center;
 }
+
+@media screen and (max-width: 768px) {
+  .profile__button_operation_edit {
+    width: 18px;
+    height: 18px;
+  }
+}

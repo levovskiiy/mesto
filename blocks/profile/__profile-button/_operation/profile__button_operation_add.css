@@ -7,5 +7,17 @@
   border-radius: 2px;
   background-repeat: no-repeat;
   background-position: center;
-  align-self: center;
+}
+
+@media screen and (max-width: 768px) {
+  .profile__button_operation_add {
+    margin-top: 36px;
+    align-self: center;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .profile__button_operation_add {
+    width: 100%;
+  }
 }

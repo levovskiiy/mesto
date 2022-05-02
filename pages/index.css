@@ -3,8 +3,10 @@
 
 @import url("../blocks/page/page.css");
 @import url("../blocks/page/__header/page__header.css");
-@import url("../blocks/page/__content/page__content.css");
 @import url("../blocks/page/__footer/page__footer.css");
+
+@import url("../blocks/content/__profile/content__profile.css");
+@import url("../blocks/content/__photo-grid/content__photo-grid.css");
 
 /* ====== HEADER SECTION ====== */
 @import url("../blocks/header/header.css");
@@ -27,3 +29,6 @@
 @import url("../blocks/card-list/__description/card-list__description.css");
 @import url("../blocks/card-list/__place/card-list__place.css");
 @import url("../blocks/card-list/__button-like/card-list__button-like.css");
+
+@import url("../blocks/footer/footer.css");
+@import url("../blocks/footer/__copyright/footer__copyright.css");
