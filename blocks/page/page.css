@@ -1,0 +1,15 @@
+.page {
+  display: grid;
+  grid-template-columns: minmax(320px, 1280px);
+  grid-template-rows: repeat(3, min-content);
+  justify-content: center;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  font-weight: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  color: #fff;
+  background: #000;
+}

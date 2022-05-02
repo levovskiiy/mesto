@@ -1,0 +1,11 @@
+@import url("../vendor/normalize.css");
+@import url("../fonts/inter.css");
+
+@import url("../blocks/page/page.css");
+@import url("../blocks/page/__header/page__header.css");
+@import url("../blocks/page/__content/page__content.css");
+@import url("../blocks/page/__footer/page__footer.css");
+
+/* ====== HEADER SECTION ====== */
+@import url("../blocks/header/header.css");
+/* ====== HEADER SECTION ====== */
