@@ -18,3 +18,12 @@
 @import url("../blocks/profile/__profile-button/__profile-button.css");
 @import url("../blocks/profile/__profile-button/_operation/profile__button_operation_add.css");
 @import url("../blocks/profile/__profile-button/_operation/profile__button_operation_edit.css");
+
+@import url("../blocks/elements/elements.css");
+
+@import url("../blocks/card-list/card-list.css");
+@import url("../blocks/card-list/__item/card-list__item.css");
+@import url("../blocks/card-list/__image/card-list__image.css");
+@import url("../blocks/card-list/__description/card-list__description.css");
+@import url("../blocks/card-list/__place/card-list__place.css");
+@import url("../blocks/card-list/__button-like/card-list__button-like.css");
