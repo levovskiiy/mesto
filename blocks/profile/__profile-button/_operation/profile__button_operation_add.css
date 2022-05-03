@@ -12,7 +12,6 @@
 @media screen and (max-width: 768px) {
   .profile__button_operation_add {
     margin-top: 36px;
-    align-self: center;
   }
 }
 

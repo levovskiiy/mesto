@@ -19,3 +19,10 @@
     margin: 28px 19px 42px 19px;
   }
 }
+
+@media screen and (max-width: 600px) {
+  .page__header {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
