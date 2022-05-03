@@ -7,3 +7,10 @@
   font-size: 18px;
   color: #fff;
 }
+
+@media screen and (max-width: 450px) {
+  .popup__button-save {
+    font-size: 14px;
+    margin-top: 45px;
+  }
+}
