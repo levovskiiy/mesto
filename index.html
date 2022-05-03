@@ -25,13 +25,11 @@
 
         <div class="profile__info">
           <h2 class="profile__name">Жак-Ив Кусто</h2>
-          <button
-            class="profile__button profile__button_operation_edit"
-          ></button>
+          <button class="btn profile__button-edit"></button>
           <p class="profile__description">Исследователь океана</p>
         </div>
 
-        <button class="profile__button profile__button_operation_add"></button>
+        <button class="btn profile__button-add"></button>
       </section>
 
       <section class="elements content__photo-grid">
@@ -108,16 +106,26 @@
           <h3 class="popup__title">Редактировать профиль</h3>
 
           <label class="popup__label">
-            <input type="text" class="popup__input" placeholder="Имя" />
+            <input
+              type="text"
+              class="popup__input popup__input_type_name"
+              placeholder="Имя"
+            />
           </label>
 
           <label class="popup__label">
-            <input type="text" class="popup__input" placeholder="Описание" />
+            <input
+              type="text"
+              class="popup__input popup__input_type_descr"
+              placeholder="Описание"
+            />
           </label>
 
           <button class="btn popup__button-save">Сохранить</button>
         </form>
       </div>
     </div>
+
+    <script src="script/popup.js"></script>
   </body>
 </html>

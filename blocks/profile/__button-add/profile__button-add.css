@@ -1,4 +1,4 @@
-.profile__button_operation_add {
+.profile__button-add {
   width: 150px;
   height: 50px;
   background-image: url("../../../../icons/add_icon.svg");
@@ -10,13 +10,13 @@
 }
 
 @media screen and (max-width: 768px) {
-  .profile__button_operation_add {
+  .profile__button-add {
     margin-top: 36px;
   }
 }
 
 @media screen and (max-width: 600px) {
-  .profile__button_operation_add {
+  .profile__button-add {
     width: 100%;
   }
 }
