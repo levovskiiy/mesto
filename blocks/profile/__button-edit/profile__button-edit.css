@@ -1,13 +1,13 @@
 .profile__button-edit {
+  box-sizing: border-box;
   margin-top: 5px;
   width: 24px;
   height: 24px;
-  background-image: url("../../../../icons/edit.svg");
+  background-image: url("../../../icons/edit.svg");
   background-size: auto;
   background-position: center;
   background-repeat: no-repeat;
   border: 1px solid #ffffff;
-  box-sizing: border-box;
   align-self: center;
 }
 
