@@ -9,6 +9,12 @@
   background-repeat: no-repeat;
   border: 1px solid #ffffff;
   align-self: center;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.profile__button-edit:hover {
+  cursor: pointer;
+  opacity: 0.6;
 }
 
 @media screen and (max-width: 768px) {

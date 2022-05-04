@@ -7,6 +7,12 @@
   background-image: url("../../../icons/add_icon.svg");
   background-repeat: no-repeat;
   background-position: center;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.profile__button-add:hover {
+  cursor: pointer;
+  opacity: 0.6;
 }
 
 @media screen and (max-width: 768px) {
