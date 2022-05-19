@@ -9,7 +9,7 @@ const cardList = document.querySelector('.card-list')
 /**
  * Объект представляет из себя все поп-апы со страницы.
  */
-const POPUPS = {
+const popups = {
   editProfie: {
     element: document.querySelector('.popup_type_edit'),
     name: document.querySelector('.popup__input_type_name'),
@@ -56,8 +56,9 @@ const initialCards = [
   },
 ]
 
+const resetForm = form => form.reset()
 const openPopup = popup => popup.classList.add('popup_opened')
-const closePopup = element => element.classList.remove('popup_opened')
+const closePopup = popup => popup.classList.remove('popup_opened')
 
 /**
  * Функция вешает слушатели событий на кнопки лайка, удаления, открытия картинки.
@@ -71,9 +72,9 @@ const setListeners = (like, trash, image) => {
   trash.addEventListener('click', () => trash.closest('.card-list__item').remove())
 
   image.addEventListener('click', () => {
-    openPopup(POPUPS.photo.element)
-    POPUPS.photo.photo.src = image.src
-    POPUPS.photo.caption.textContent = image.alt
+    openPopup(popups.photo.element)
+    popups.photo.photo.src = image.src
+    popups.photo.caption.textContent = image.alt
   })
 }
 
@@ -112,33 +113,32 @@ const initCards = () => {
 }
 
 const insertValues = (name, description) => {
-  POPUPS.editProfie.name.value = name
-  POPUPS.editProfie.job.value = description
+  popups.editProfie.name.value = name
+  popups.editProfie.job.value = description
 }
 
-POPUPS.editProfie.element.addEventListener('submit', evt => {
+popups.editProfie.element.addEventListener('submit', evt => {
   evt.preventDefault() // Эта строчка отменяет стандартную отправку формы.
-  profileName.textContent = POPUPS.editProfie.name.value
-  profileDescription.textContent = POPUPS.editProfie.job.value
+  profileName.textContent = popups.editProfie.name.value
+  profileDescription.textContent = popups.editProfie.job.value
 
-  closePopup(POPUPS.editProfie.element)
+  closePopup(popups.editProfie.element)
 })
 
-POPUPS.addCard.element.addEventListener('submit', evt => {
+popups.addCard.element.addEventListener('submit', evt => {
   evt.preventDefault()
   addCard({
-    name: POPUPS.addCard.placeField.value,
-    link: POPUPS.addCard.linkField.value,
+    name: popups.addCard.placeField.value,
+    link: popups.addCard.linkField.value,
   })
-  POPUPS.addCard.placeField.value = ''
-  POPUPS.addCard.linkField.value = ''
-  closePopup(POPUPS.addCard.element)
+  resetForm(popups.addCard.element.querySelector('.popup__form'))
+  closePopup(popups.addCard.element)
 })
 
-profileAddButton.addEventListener('click', () => openPopup(POPUPS.addCard.element))
+profileAddButton.addEventListener('click', () => openPopup(popups.addCard.element))
 
 profileEditButton.addEventListener('click', () => {
-  openPopup(POPUPS.editProfie.element)
+  openPopup(popups.editProfie.element)
   insertValues(profileName.textContent, profileDescription.textContent)
 })
 

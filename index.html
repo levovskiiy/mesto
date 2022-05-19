@@ -41,9 +41,15 @@
         <form name="edit-profile" action="#" class="popup__form">
           <h3 class="popup__title">Редактировать профиль</h3>
 
-          <input name="username" type="text" class="popup__input popup__input_type_name" placeholder="Имя" />
+          <input required name="username" type="text" class="popup__input popup__input_type_name" placeholder="Имя" />
 
-          <input name="userJobs" type="text" class="popup__input popup__input_type_descr" placeholder="Описание" />
+          <input
+            required
+            name="userJobs"
+            type="text"
+            class="popup__input popup__input_type_descr"
+            placeholder="Описание"
+          />
 
           <button type="submit" class="btn popup__button-save">Сохранить</button>
         </form>
@@ -56,11 +62,12 @@
         <form name="edit-profile" action="#" class="popup__form">
           <h3 class="popup__title">Новое место</h3>
 
-          <input name="username" type="text" class="popup__input popup__input_type_place" placeholder="Название" />
+          <input required name="name" type="text" class="popup__input popup__input_type_place" placeholder="Название" />
 
           <input
-            name="userJobs"
-            type="text"
+            required
+            name="link"
+            type="url"
             class="popup__input popup__input_type_link"
             placeholder="Ссылка на картинку"
           />
