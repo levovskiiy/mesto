@@ -2,7 +2,6 @@
   background-color: transparent;
   color: rgba(0, 0, 0, 0.2);
   border: 1px solid rgba(0, 0, 0, 0.2);
-  transition: none;
 }
 
 .popup__button-save_disabled:hover {
