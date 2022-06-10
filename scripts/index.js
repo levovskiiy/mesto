@@ -15,7 +15,6 @@ const caption = zoomPhotoPopup.querySelector('.popup__image-caption');
 
 const forms = document.forms;
 
-
 const initialCards = [
   {
     name: 'Архыз',
@@ -43,18 +42,18 @@ const initialCards = [
   },
 ];
 
-const escapeClosePopup = (evt) => {
-  const currentPopup = document.querySelector('.popup_opened');
+const escapeClosePopup = evt => {
   if (evt.key === 'Escape') {
+    const currentPopup = document.querySelector('.popup_opened');
     closePopup(currentPopup);
   }
-}
+};
 
-const overlayClosePopup = (evt) => {
+const overlayClosePopup = evt => {
   if (evt.target === evt.currentTarget) {
     closePopup(evt.currentTarget);
   }
-}
+};
 
 const openPopup = popup => {
   document.addEventListener('keydown', escapeClosePopup);
@@ -62,9 +61,12 @@ const openPopup = popup => {
 
   popup.classList.add('popup_opened');
 };
+
+/**
+ * @param {HTMLElement} popup
+ */
 const closePopup = popup => {
   popup.classList.remove('popup_opened');
-
   document.removeEventListener('keydown', escapeClosePopup);
   popup.removeEventListener('click', overlayClosePopup);
 };
@@ -137,8 +139,7 @@ forms.editProfile.addEventListener('submit', evt => {
   profileDescription.textContent = forms.editProfile.description.value;
 
   closePopup(profilePopup);
-
-})
+});
 
 forms.newPlace.addEventListener('submit', evt => {
   evt.preventDefault();
@@ -147,7 +148,7 @@ forms.newPlace.addEventListener('submit', evt => {
     link: forms.newPlace.link.value,
   });
   closePopup(newPlacePopup);
-})
+});
 
 newCardButton.addEventListener('click', () => openPopup(newPlacePopup));
 
