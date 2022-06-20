@@ -1,65 +1,59 @@
 export default class FormValidator {
   /**
    * @constructor
-   * @param {string} formSelector - селектор класса формы
+   * @param {HTMLFormElement} form
+   * @param {object} formSettings
    * @param {string} inputSelector - селектор поля ввода формы
    * @param {string} submitButtonSelector - селектор кнопки отправки формы
    * @param {string} inactiveButtonClass - класс неактивной кнопки
-   * @param {string} inputErrClass - класс для ошибки поля ввода
+   * @param {string} inputErrorClass - класс для ошибки поля ввода
    * @param {string} errorClass - класс для подсказки ошибки
    */
-  constructor({
-    formSelector,
-    inputSelector,
-    submitButtonSelector,
-    inactiveButtonClass,
-    inputErrorClass,
-    errorClass,
-  }) {
-    this._formSelector = formSelector;
+  constructor(
+    form,
+    { inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass }
+  ) {
+    this._formElement = form;
     this._inputSelector = inputSelector;
     this._submitButtonSelector = submitButtonSelector;
     this._inactiveButtonClass = inactiveButtonClass;
     this._inputErrorClass = inputErrorClass;
     this._errorClass = errorClass;
-    this._forms = document.querySelectorAll(this._formSelector);
+    this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
+    this._buttonElement = this._formElement.querySelector(this._submitButtonSelector);
   }
 
   /**
    * Функция проверяет невалидно ли поле ввода.
-   * @param {HTMLInputElement[]} inputList
    * @returns {boolean}
    * @private
    */
-  _hasInvalidInput(inputList) {
-    return inputList.some(inputElement => !inputElement.validity.valid);
+  _hasInvalidInput() {
+    return this._inputList.some(inputElement => !inputElement.validity.valid);
   }
 
   /**
    * Меняет состояние кнопки в зависимости от валидности полей формы.
-   * @param {HTMLInputElement[]} inputList
-   * @param {HTMLButtonElement} buttonElement
    * @private
    */
-  _toggleStateButton(inputList, buttonElement) {
-    if (this._hasInvalidInput(inputList)) {
-      buttonElement.classList.add(this._inactiveButtonClass);
-      buttonElement.disabled = true;
+  _toggleStateButton() {
+    if (this._hasInvalidInput()) {
+      this._buttonElement.classList.add(this._inactiveButtonClass);
+      this._buttonElement.disabled = true;
     } else {
-      buttonElement.classList.remove(this._inactiveButtonClass);
-      buttonElement.disabled = false;
+      this._buttonElement.classList.remove(this._inactiveButtonClass);
+      this._buttonElement.disabled = false;
     }
   }
 
   /**
    * Показывает текст ошибки.
-   * @param {HTMLFormElement} formElement
    * @param {HTMLInputElement} inputElement
    * @param {string} errorMessage
    * @private
    */
-  _showErrorInput(formElement, inputElement, errorMessage) {
-    const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  _showErrorInput(inputElement, errorMessage) {
+    const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.add(this._inputErrorClass);
     errorElement.textContent = errorMessage;
     errorElement.classList.add(this._errorClass);
@@ -67,12 +61,11 @@ export default class FormValidator {
 
   /**
    * Скрывает текст ошибки
-   * @param {HTMLFormElement} formElement
    * @param {HTMLInputElement} inputElement
    * @private
    */
-  _hideErrorInput(formElement, inputElement) {
-    const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  _hideErrorInput(inputElement) {
+    const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.remove(this._inputErrorClass);
     errorElement.classList.remove(this._errorClass);
     errorElement.textContent = '';
@@ -80,56 +73,47 @@ export default class FormValidator {
 
   /**
    * Проверяет поле ввода на валидность и показывает или скрывает текст ошибки.
-   * @param formElement
    * @param inputElement
    * @private
    */
-  _checkInputValidity(formElement, inputElement) {
+  _checkInputValidity(inputElement) {
     if (!inputElement.validity.valid) {
-      this._showErrorInput(formElement, inputElement, inputElement.validationMessage);
+      this._showErrorInput(inputElement, inputElement.validationMessage);
     } else {
-      this._hideErrorInput(formElement, inputElement);
+      this._hideErrorInput(inputElement);
     }
   }
 
   /**
    * Устанавливает слушатели событий на форму и ее поля ввода.
-   * @param {HTMLFormElement} formElement
-   * @param {HTMLInputElement[]} inputList
-   * @param {HTMLButtonElement} buttonElement
    * @private
    */
-  _setListenersForm(formElement, inputList, buttonElement) {
-    formElement.addEventListener('submit', event => {
+  _setListenersForm() {
+    this._formElement.addEventListener('submit', event => {
       event.preventDefault();
       event.target.reset();
-      this._toggleStateButton(inputList, buttonElement);
+      this._toggleStateButton();
     });
 
-    formElement.addEventListener('reset', event => {
+    this._formElement.addEventListener('reset', event => {
       event.target.reset();
-      this._toggleStateButton(inputList, buttonElement);
+      this._toggleStateButton();
     });
 
-    this._toggleStateButton(inputList, buttonElement);
+    this._toggleStateButton();
 
-    inputList.forEach(inputElement => {
+    this._inputList.forEach(inputElement => {
       inputElement.addEventListener('input', () => {
-        this._toggleStateButton(inputList, buttonElement);
-        this._checkInputValidity(formElement, inputElement);
+        this._toggleStateButton();
+        this._checkInputValidity(inputElement);
       });
     });
   }
 
   /**
-   * Метод включает валидацию для всех форм на странице.
+   * Метод включает валидацию формы.
    */
   enableValidation() {
-    this._forms.forEach(formElement => {
-      const inputList = Array.from(formElement.querySelectorAll(this._inputSelector));
-      const buttonElement = formElement.querySelector(this._submitButtonSelector);
-
-      this._setListenersForm(formElement, inputList, buttonElement);
-    });
+    this._setListenersForm();
   }
 }

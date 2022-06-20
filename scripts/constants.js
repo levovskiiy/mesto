@@ -15,6 +15,15 @@ const caption = zoomPhotoPopup.querySelector('.popup__image-caption');
 
 const forms = document.forms;
 
+const formSettings = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button-save',
+  inactiveButtonClass: 'popup__button-save_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible',
+};
+
 const initialCards = [
   {
     name: 'Архыз',
@@ -56,4 +65,5 @@ export {
   newPlacePopup,
   zoomPhotoPopup,
   initialCards,
+  formSettings,
 };

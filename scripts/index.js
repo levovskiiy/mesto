@@ -14,6 +14,7 @@ import {
   newPlacePopup,
   zoomPhotoPopup,
   initialCards,
+  formSettings,
 } from './constants.js';
 
 import { closePopup, openPopup } from './popup.js';
@@ -98,16 +99,9 @@ function app() {
 
   setButtonsListeners();
 
-  const validator = new FormValidator({
-    formSelector: '.popup__form',
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.popup__button-save',
-    inactiveButtonClass: 'popup__button-save_disabled',
-    inputErrorClass: 'popup__input_type_error',
-    errorClass: 'popup__error_visible',
+  [...forms].forEach(form => {
+    new FormValidator(form, formSettings).enableValidation();
   });
-
-  validator.enableValidation();
 }
 
 app();
