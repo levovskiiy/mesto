@@ -1,83 +1,22 @@
 import Card from './Card.js';
 import Validate from './Validate.js';
+import {
+  profileDescription,
+  profileName,
+  profilePopup,
+  forms,
+  caption,
+  newCardButton,
+  cardsContainer,
+  closingButtonList,
+  editProfileButton,
+  imagePlace,
+  newPlacePopup,
+  zoomPhotoPopup,
+  initialCards,
+} from './constants.js';
 
-const profile = document.querySelector('.profile');
-const profileName = profile.querySelector('.profile__name');
-const profileDescription = profile.querySelector('.profile__description');
-const editProfileButton = profile.querySelector('.profile__button-edit');
-const newCardButton = profile.querySelector('.profile__button-add');
-
-const closingButtonList = document.querySelectorAll('.popup__button-close');
-const cardsContainer = document.querySelector('.card-list');
-
-const profilePopup = document.querySelector('.popup_type_edit');
-const newPlacePopup = document.querySelector('.popup_type_add-card');
-const zoomPhotoPopup = document.querySelector('.popup_type_open-photo');
-const imagePlace = zoomPhotoPopup.querySelector('.popup__image');
-const caption = zoomPhotoPopup.querySelector('.popup__image-caption');
-
-const forms = document.forms;
-
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg',
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg',
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg',
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg',
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg',
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg',
-  },
-];
-
-const escapeClosePopup = evt => {
-  if (evt.key === 'Escape') {
-    const currentPopup = document.querySelector('.popup_opened');
-    closePopup(currentPopup);
-  }
-};
-
-const overlayClosePopup = evt => {
-  if (evt.target === evt.currentTarget) {
-    closePopup(evt.currentTarget);
-  }
-};
-
-const openPopup = popup => {
-  if (!popup.classList.contains('popup_type_open-photo')) {
-    popup.querySelector('.popup__form').reset();
-  }
-  document.addEventListener('keydown', escapeClosePopup);
-  popup.addEventListener('click', overlayClosePopup);
-  popup.classList.add('popup_opened');
-};
-
-/**
- * @param {HTMLElement} popup
- */
-const closePopup = popup => {
-  if (!popup.classList.contains('popup_type_open-photo')) {
-    popup.querySelector('.popup__form').reset();
-  }
-  popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', escapeClosePopup);
-  popup.removeEventListener('click', overlayClosePopup);
-};
+import { closePopup, openPopup } from './popup.js';
 
 /**
  * Функция добавляет 1 карточку в начало списка.
@@ -116,49 +55,59 @@ const initCards = () => {
   });
 };
 
-const insertValues = (/** @type {string} */ name, /** @type {string} */ description) => {
-  forms.editProfile.username.value = name;
-  forms.editProfile.description.value = description;
-};
+/**
+ * Устанавливает слушатели события submit на все формы на странице.
+ */
+function setFormsListeners() {
+  forms.editProfile.addEventListener('submit', evt => {
+    evt.preventDefault();
+    profileName.textContent = forms.editProfile.username.value;
+    profileDescription.textContent = forms.editProfile.description.value;
 
-forms.editProfile.addEventListener('submit', evt => {
-  evt.preventDefault();
-  profileName.textContent = forms.editProfile.username.value;
-  profileDescription.textContent = forms.editProfile.description.value;
-
-  closePopup(profilePopup);
-});
-
-forms.newPlace.addEventListener('submit', evt => {
-  evt.preventDefault();
-  addCard({
-    name: forms.newPlace.name.value,
-    link: forms.newPlace.link.value,
+    closePopup(profilePopup);
   });
-  closePopup(newPlacePopup);
-});
 
-newCardButton.addEventListener('click', () => openPopup(newPlacePopup));
+  forms.newPlace.addEventListener('submit', evt => {
+    evt.preventDefault();
+    addCard({
+      name: forms.newPlace.name.value,
+      link: forms.newPlace.link.value,
+    });
+    closePopup(newPlacePopup);
+  });
+}
 
-editProfileButton.addEventListener('click', () => {
-  openPopup(profilePopup);
-  insertValues(profileName.textContent, profileDescription.textContent);
-  forms.editProfile.username.value = profileName.textContent;
-  forms.editProfile.description.value = profileDescription.textContent;
-});
+function setButtonsListeners() {
+  newCardButton.addEventListener('click', () => openPopup(newPlacePopup));
 
-closingButtonList.forEach(closingButton => {
-  closingButton.addEventListener('click', () => closePopup(closingButton.closest('.popup')));
-});
+  editProfileButton.addEventListener('click', () => {
+    openPopup(profilePopup);
+    forms.editProfile.username.value = profileName.textContent;
+    forms.editProfile.description.value = profileDescription.textContent;
+  });
 
-initCards();
-const validator = new Validate({
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button-save',
-  inactiveButtonClass: 'popup__button-save_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible',
-});
+  closingButtonList.forEach(closingButton => {
+    closingButton.addEventListener('click', () => closePopup(closingButton.closest('.popup')));
+  });
+}
 
-validator.enableValidation();
+function app() {
+  initCards();
+
+  setFormsListeners();
+
+  setButtonsListeners();
+
+  const validator = new Validate({
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__button-save',
+    inactiveButtonClass: 'popup__button-save_disabled',
+    inputErrorClass: 'popup__input_type_error',
+    errorClass: 'popup__error_visible',
+  });
+
+  validator.enableValidation();
+}
+
+app();
