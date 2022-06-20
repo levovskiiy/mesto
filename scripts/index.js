@@ -1,4 +1,5 @@
 import Card from './Card.js';
+import Validate from './Validate.js';
 
 const profile = document.querySelector('.profile');
 const profileName = profile.querySelector('.profile__name');
@@ -58,9 +59,11 @@ const overlayClosePopup = evt => {
 };
 
 const openPopup = popup => {
+  if (!popup.classList.contains('popup_type_open-photo')) {
+    popup.querySelector('.popup__form').reset();
+  }
   document.addEventListener('keydown', escapeClosePopup);
   popup.addEventListener('click', overlayClosePopup);
-
   popup.classList.add('popup_opened');
 };
 
@@ -68,6 +71,9 @@ const openPopup = popup => {
  * @param {HTMLElement} popup
  */
 const closePopup = popup => {
+  if (!popup.classList.contains('popup_type_open-photo')) {
+    popup.querySelector('.popup__form').reset();
+  }
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', escapeClosePopup);
   popup.removeEventListener('click', overlayClosePopup);
@@ -86,7 +92,7 @@ const addCard = ({ name, link }) => {
     popupImageElement: imagePlace,
     popupCaptionElement: caption,
     openPopupHandler: openPopup,
-  }
+  };
   const cardElement = new Card(settings, '#card');
 
   cardsContainer.prepend(cardElement.createCard());
@@ -104,7 +110,7 @@ const initCards = () => {
       popupImageElement: imagePlace,
       popupCaptionElement: caption,
       openPopupHandler: openPopup,
-    }
+    };
     const cardElement = new Card(settings, '#card');
     cardsContainer.append(cardElement.createCard());
   });
@@ -146,3 +152,13 @@ closingButtonList.forEach(closingButton => {
 });
 
 initCards();
+const validator = new Validate({
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button-save',
+  inactiveButtonClass: 'popup__button-save_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible',
+});
+
+validator.enableValidation();
