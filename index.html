@@ -42,17 +42,17 @@
           <h3 class="popup__title">Редактировать профиль</h3>
 
           <label>
-          <input
-            id="username"
-            name="username"
-            type="text"
-            class="popup__input popup__input_type_name"
-            placeholder="Имя"
-            minlength="2"
-            maxlength="40"
-            value='_'
-            required
-          />
+            <input
+              id="username"
+              name="username"
+              type="text"
+              class="popup__input popup__input_type_name"
+              placeholder="Имя"
+              minlength="2"
+              maxlength="40"
+              value="_"
+              required
+            />
           </label>
           <span class="popup__input-error username-error"></span>
 
@@ -65,7 +65,7 @@
               placeholder="Описание"
               minlength="2"
               maxlength="200"
-              value='_'
+              value="_"
               required
             />
           </label>
@@ -135,7 +135,6 @@
       </li>
     </template>
 
-    <script src='scripts/index.js'></script>
-    <script src='scripts/validate.js'></script>
+    <script type="module" src="./scripts/index.js"></script>
   </body>
 </html>

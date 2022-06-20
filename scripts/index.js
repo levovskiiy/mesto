@@ -1,3 +1,5 @@
+import Card from './Card.js';
+
 const profile = document.querySelector('.profile');
 const profileName = profile.querySelector('.profile__name');
 const profileDescription = profile.querySelector('.profile__description');
@@ -72,60 +74,40 @@ const closePopup = popup => {
 };
 
 /**
- * Функция вешает слушатели событий на кнопки лайка, удаления, открытия картинки.
- * @param {Element} like
- * @param {Element} trash
- * @param {Element} image
- */
-const setListeners = (like, trash, image) => {
-  like.addEventListener('click', () => like.classList.toggle('card-list__button-like_state_active'));
-  trash.addEventListener('click', () => trash.closest('.card-list__item').remove());
-  image.addEventListener('click', () => {
-    openPopup(zoomPhotoPopup);
-    imagePlace.src = image.src;
-    imagePlace.alt = image.alt;
-    caption.textContent = image.alt;
-  });
-};
-
-const setAttributes = (element, attrs = {}) => {
-  for (const key in attrs) {
-    element[key] = attrs[key];
-  }
-};
-const getTemplateContent = template => document.querySelector(template).content.cloneNode(true);
-
-/**
- * Функция создает экземпляр карточки, навешывает слушатели событий.
- * @param {Object} card
- * @returns {Element}
- */
-const createCard = card => {
-  const cardElement = getTemplateContent('#card');
-  const cardImage = cardElement.querySelector('.card-list__image');
-  const place = cardElement.querySelector('.card-list__place');
-  const cardButton = cardElement.querySelector('.card-list__button-like');
-  const cardTrash = cardElement.querySelector('.card-list__trash');
-
-  place.textContent = card.name;
-  setAttributes(cardImage, { src: card.link, alt: card.name });
-  setListeners(cardButton, cardTrash, cardImage);
-
-  return cardElement;
-};
-
-/**
  * Функция добавляет 1 карточку в начало списка.
  * @param {object} card
  * @returns
  */
-const addCard = card => cardsContainer.prepend(createCard(card));
+const addCard = ({ name, link }) => {
+  const settings = {
+    namePlace: name,
+    linkImage: link,
+    popupElement: zoomPhotoPopup,
+    popupImageElement: imagePlace,
+    popupCaptionElement: caption,
+    openPopupHandler: openPopup,
+  }
+  const cardElement = new Card(settings, '#card');
+
+  cardsContainer.prepend(cardElement.createCard());
+};
 
 /**
  * Добавляет начальные карточки из массива.
  */
 const initCards = () => {
-  initialCards.forEach(card => cardsContainer.append(createCard(card)));
+  initialCards.forEach(({ name, link }) => {
+    const settings = {
+      namePlace: name,
+      linkImage: link,
+      popupElement: zoomPhotoPopup,
+      popupImageElement: imagePlace,
+      popupCaptionElement: caption,
+      openPopupHandler: openPopup,
+    }
+    const cardElement = new Card(settings, '#card');
+    cardsContainer.append(cardElement.createCard());
+  });
 };
 
 const insertValues = (/** @type {string} */ name, /** @type {string} */ description) => {
