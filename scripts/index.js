@@ -1,5 +1,5 @@
 import Card from './Card.js';
-import Validate from './Validate.js';
+import FormValidator from './FormValidator.js';
 import {
   profileDescription,
   profileName,
@@ -98,7 +98,7 @@ function app() {
 
   setButtonsListeners();
 
-  const validator = new Validate({
+  const validator = new FormValidator({
     formSelector: '.popup__form',
     inputSelector: '.popup__input',
     submitButtonSelector: '.popup__button-save',

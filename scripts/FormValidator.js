@@ -1,4 +1,4 @@
-export default class Validate {
+export default class FormValidator {
   /**
    * @constructor
    * @param {string} formSelector - селектор класса формы
