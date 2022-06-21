@@ -9,9 +9,9 @@ const cardsContainer = document.querySelector('.card-list');
 
 const profilePopup = document.querySelector('.popup_type_edit');
 const newPlacePopup = document.querySelector('.popup_type_add-card');
-const zoomPhotoPopup = document.querySelector('.popup_type_open-photo');
-const imagePlace = zoomPhotoPopup.querySelector('.popup__image');
-const caption = zoomPhotoPopup.querySelector('.popup__image-caption');
+const zoomPopup = document.querySelector('.popup_type_open-photo');
+const zoomPopupImage = zoomPopup.querySelector('.popup__image');
+const zoomPopupCaption = zoomPopup.querySelector('.popup__image-caption');
 const popups = document.querySelectorAll('.popup');
 const forms = document.forms;
 
@@ -56,14 +56,14 @@ export {
   profileName,
   profilePopup,
   forms,
-  caption,
+  zoomPopupCaption,
   newCardButton,
   cardsContainer,
   closingButtonList,
   editProfileButton,
-  imagePlace,
+  zoomPopupImage,
   newPlacePopup,
-  zoomPhotoPopup,
+  zoomPopup,
   initialCards,
   formSettings,
   popups,
