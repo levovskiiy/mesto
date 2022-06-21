@@ -55,12 +55,7 @@ const closePopup = popup => {
   document.removeEventListener('keydown', escapeClosePopup);
 };
 
-/**
- * Функция добавляет 1 карточку в начало списка.
- * @param {object} card
- * @returns
- */
-const addCard = ({ name, link }) => {
+const createCard = (name = '', link = '') => {
   const settings = {
     namePlace: name,
     linkImage: link,
@@ -69,9 +64,17 @@ const addCard = ({ name, link }) => {
     popupCaptionElement: caption,
     openPopupHandler: openPopup,
   };
-  const cardElement = new Card(settings, '#card');
 
-  cardsContainer.prepend(cardElement.createCard());
+  return new Card(settings).createCard();
+};
+
+/**
+ * Функция добавляет 1 карточку в начало списка.
+ * @param {object} card
+ * @returns
+ */
+const addCard = ({ name, link }) => {
+  cardsContainer.prepend(createCard(name, link));
 };
 
 /**
@@ -79,16 +82,7 @@ const addCard = ({ name, link }) => {
  */
 const initCards = () => {
   initialCards.forEach(({ name, link }) => {
-    const settings = {
-      namePlace: name,
-      linkImage: link,
-      popupElement: zoomPhotoPopup,
-      popupImageElement: imagePlace,
-      popupCaptionElement: caption,
-      openPopupHandler: openPopup,
-    };
-    const cardElement = new Card(settings, '#card');
-    cardsContainer.append(cardElement.createCard());
+    cardsContainer.append(createCard(name, link));
   });
 };
 
