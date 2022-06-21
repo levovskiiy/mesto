@@ -4,30 +4,16 @@ export default class Card {
    * @param {object} settings
    * @param {string} namePlace
    * @param {string} linkImage
+   * @param {string} selector
    * @param {function} openPopupHandler
    * @param {Element} popupElement
-   * @param {Element} popupImageElement
-   * @param {Element} popupCaptionElement
-   * @param {String} selector
    */
-  constructor(
-    {
-      namePlace,
-      linkImage,
-      openPopupHandler,
-      popupElement,
-      popupImageElement,
-      popupCaptionElement,
-    },
-    selector
-  ) {
+  constructor({ namePlace, linkImage, openPopupHandler, popupElement }, selector) {
     this._namePlace = namePlace;
     this._linkImage = linkImage;
     this._selector = selector;
     this._openPopupHandler = openPopupHandler;
     this._popupElement = popupElement;
-    this._popupImageElement = popupImageElement;
-    this._popupCaptionElement = popupCaptionElement;
   }
 
   /**
@@ -47,10 +33,11 @@ export default class Card {
    * @private
    */
   _open() {
-    this._openPopupHandler(this._popupElement);
-    this._popupImageElement.src = this._linkImage;
-    this._popupImageElement.alt = this._namePlace;
-    this._popupCaptionElement.textContent = this._namePlace;
+    this._openPopupHandler(this._popupElement, {
+      link: this._linkImage,
+      alt: this._namePlace,
+      caption: this._namePlace,
+    });
   }
 
   /**
@@ -67,6 +54,7 @@ export default class Card {
    */
   _delete() {
     this._element.remove();
+    this._element = null;
   }
 
   /**
