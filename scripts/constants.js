@@ -12,7 +12,7 @@ const newPlacePopup = document.querySelector('.popup_type_add-card');
 const zoomPhotoPopup = document.querySelector('.popup_type_open-photo');
 const imagePlace = zoomPhotoPopup.querySelector('.popup__image');
 const caption = zoomPhotoPopup.querySelector('.popup__image-caption');
-
+const popups = document.querySelectorAll('.popup');
 const forms = document.forms;
 
 const formSettings = {
@@ -66,4 +66,5 @@ export {
   zoomPhotoPopup,
   initialCards,
   formSettings,
+  popups,
 };
