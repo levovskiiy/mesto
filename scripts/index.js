@@ -5,14 +5,14 @@ import {
   profileName,
   profilePopup,
   forms,
-  caption,
+  zoomPopup,
+  zoomPopupCaption,
+  zoomPopupImage,
   newCardButton,
   cardsContainer,
   closingButtonList,
   editProfileButton,
-  imagePlace,
   newPlacePopup,
-  zoomPhotoPopup,
   initialCards,
   formSettings,
   popups,
@@ -47,6 +47,13 @@ const openPopup = popup => {
   popup.classList.add('popup_opened');
 };
 
+const openZoomPopup = (popup, { link, caption, alt }) => {
+  openPopup(popup);
+  zoomPopupImage.src = link;
+  zoomPopupImage.alt = alt;
+  zoomPopupCaption.textContent = caption;
+};
+
 /**
  * @param {HTMLElement} popup
  */
@@ -55,17 +62,15 @@ const closePopup = popup => {
   document.removeEventListener('keydown', escapeClosePopup);
 };
 
-const createCard = (name = '', link = '') => {
+const makeCard = (name = '', link = '') => {
   const settings = {
     namePlace: name,
     linkImage: link,
-    popupElement: zoomPhotoPopup,
-    popupImageElement: imagePlace,
-    popupCaptionElement: caption,
-    openPopupHandler: openPopup,
+    popupElement: zoomPopup,
+    openPopupHandler: openZoomPopup,
   };
 
-  return new Card(settings).createCard();
+  return new Card(settings, '#card').createCard();
 };
 
 /**
@@ -74,7 +79,7 @@ const createCard = (name = '', link = '') => {
  * @returns
  */
 const addCard = ({ name, link }) => {
-  cardsContainer.prepend(createCard(name, link));
+  cardsContainer.prepend(makeCard(name, link));
 };
 
 /**
@@ -82,7 +87,7 @@ const addCard = ({ name, link }) => {
  */
 const initCards = () => {
   initialCards.forEach(({ name, link }) => {
-    cardsContainer.append(createCard(name, link));
+    cardsContainer.append(makeCard(name, link));
   });
 };
 
@@ -106,6 +111,7 @@ function setFormsListeners() {
 
   forms.newPlace.addEventListener('submit', evt => {
     evt.preventDefault();
+    evt.target.reset();
     addCard({
       name: forms.newPlace.name.value,
       link: forms.newPlace.link.value,
