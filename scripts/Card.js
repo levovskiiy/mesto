@@ -1,6 +1,7 @@
 export default class Card {
   /**
    * @constructor
+   * @param {object} settings
    * @param {string} namePlace
    * @param {string} linkImage
    * @param {function} openPopupHandler
@@ -10,12 +11,13 @@ export default class Card {
    * @param {String} selector
    */
   constructor(
-    { namePlace,
+    {
+      namePlace,
       linkImage,
       openPopupHandler,
       popupElement,
       popupImageElement,
-      popupCaptionElement
+      popupCaptionElement,
     },
     selector
   ) {
@@ -39,7 +41,6 @@ export default class Card {
       .content.querySelector('.card-list__item')
       .cloneNode(true);
   }
-
 
   /**
    * Метод обработки события по клику на картинку. Открывает Popup с картинкой и описанием.
