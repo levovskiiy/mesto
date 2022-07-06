@@ -123,7 +123,9 @@ function setFormsListeners() {
 }
 
 function setButtonsListeners() {
-  newCardButton.addEventListener('click', () => openPopup(newPlacePopup));
+  newCardButton.addEventListener('click', () => {
+    openPopup(newPlacePopup);
+  });
 
   editProfileButton.addEventListener('click', () => {
     openPopup(profilePopup);
