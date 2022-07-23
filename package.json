@@ -2,7 +2,7 @@
   "name": "mesto",
   "packageManager": "yarn@3.2.1",
   "description": "",
-  "main": "./src/scripts/index.js",
+  "main": "src/pages/index.js",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --mode production",
     "dev": "cross-env NODE_ENV=development webpack-dev-server"
