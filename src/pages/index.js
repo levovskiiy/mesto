@@ -41,7 +41,11 @@ const cardList = new Section(
 );
 
 const popupWithAddCard = new PopupWithForm(
-  POPUP_SELECTORS,
+  {
+    classes: POPUP_SELECTORS.classes,
+    formSelector: FORM_SETTINGS.formSelector,
+    inputSelector: FORM_SETTINGS.inputSelector,
+  },
   POPUP_SELECTORS.type.add,
   values => {
     const card = makeCard(
@@ -50,12 +54,16 @@ const popupWithAddCard = new PopupWithForm(
       cardTemplateSelector
     );
     cardList.prepend(card);
-    popupWithImage.close();
+    popupWithAddCard.close();
   }
 );
 
 const popupWithProfile = new PopupWithForm(
-  POPUP_SELECTORS,
+  {
+    classes: POPUP_SELECTORS.classes,
+    formSelector: FORM_SETTINGS.formSelector,
+    inputSelector: FORM_SETTINGS.inputSelector,
+  },
   POPUP_SELECTORS.type.edit,
 
   values => {
@@ -78,7 +86,9 @@ function setValidationForms() {
 
 function app() {
   setPopupListeners();
+
   setValidationForms();
+
   editButton.addEventListener('click', () => {
     popupWithProfile.open(userInfo.getUserInfo());
   });

@@ -12,7 +12,7 @@ const PROFILE_SELECTORS = {
   description: '.profile__description',
   buttons: {
     add: '.profile__button-add',
-    edit: 'profile__button-edit',
+    edit: '.profile__button-edit',
   },
 };
 
@@ -20,7 +20,7 @@ const POPUP_SELECTORS = {
   type: {
     add: '.popup_type_add-card',
     photo: '.popup_type_open-photo',
-    edit: 'popup_type_edit',
+    edit: '.popup_type_edit',
   },
   classes: {
     opened: 'popup_opened',
