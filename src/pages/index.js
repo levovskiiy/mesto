@@ -58,6 +58,13 @@ const popupWithAddCard = new PopupWithForm(
   }
 );
 
+const popupWithAddCardValidator = new FormValidator(
+  FORMS.newPlace,
+  FORM_SETTINGS
+);
+
+popupWithAddCardValidator.enableValidation();
+
 const popupWithProfile = new PopupWithForm(
   {
     classes: POPUP_SELECTORS.classes,
@@ -72,27 +79,30 @@ const popupWithProfile = new PopupWithForm(
   }
 );
 
+const popupWithProfileValidator = new FormValidator(
+  FORMS.editProfile,
+  FORM_SETTINGS
+);
+
+popupWithProfileValidator.enableValidation();
+
 function setPopupListeners() {
   popupWithAddCard.setEventListener();
   popupWithImage.setEventListener();
   popupWithProfile.setEventListener();
 }
 
-function setValidationForms() {
-  [...FORMS].forEach(form => {
-    new FormValidator(form, FORM_SETTINGS).enableValidation();
-  });
-}
-
 function app() {
   setPopupListeners();
 
-  setValidationForms();
-
   editButton.addEventListener('click', () => {
     popupWithProfile.open(userInfo.getUserInfo());
+    popupWithProfileValidator.initialState();
   });
-  addButton.addEventListener('click', () => popupWithAddCard.open());
+  addButton.addEventListener('click', () => {
+    popupWithAddCard.open();
+    popupWithAddCardValidator.initialState();
+  });
 
   cardList.render();
 }
