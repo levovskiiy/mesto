@@ -1,12 +1,9 @@
 export default class Section {
   /**
-   *
-   * @param {Array} items
    * @param {(HTMLElement) => void} renderer
    * @param {string} selector
    */
-  constructor({ items, renderer }, selector) {
-    this._items = items;
+  constructor(renderer, selector) {
     this._handler = renderer;
     this._container = document.querySelector(selector);
   }
@@ -15,8 +12,8 @@ export default class Section {
     this._container.innerHTML = '';
   }
 
-  render() {
-    this._items.forEach(item => {
+  render(items) {
+    items.forEach(item => {
       this._handler(item);
     });
   }
@@ -27,9 +24,5 @@ export default class Section {
 
   prepend(item) {
     this._container.prepend(item);
-  }
-
-  setItems(newItems) {
-    this._items = newItems;
   }
 }

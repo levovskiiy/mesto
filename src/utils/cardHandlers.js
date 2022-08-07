@@ -33,7 +33,7 @@ export function createCard(item, popupWithImage = null, popupWithDelete = null) 
 export function newCardHandler(values, popup, container, popupWithImage = null, popupWithDelete = null) {
   popup.handleSubmitButtonState(true);
   api
-    .newCard(values)
+    .postCard(values)
     .then(result => {
       const card = createCard(result, popupWithImage, popupWithDelete);
       container.prepend(card);

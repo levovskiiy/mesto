@@ -19,16 +19,10 @@ const popupWithDeleteCard = new PopupWithDeleteCard(POPUP_SELECTORS.classes, POP
   deleteCard(card, popupWithDeleteCard)
 );
 
-const cardList = new Section(
-  {
-    items: [],
-    renderer: item => {
-      const card = createCard(item, popupWithImage, popupWithDeleteCard);
-      cardList.add(card);
-    },
-  },
-  '.card-list'
-);
+const cardList = new Section(item => {
+  const card = createCard(item, popupWithImage, popupWithDeleteCard);
+  cardList.add(card);
+}, '.card-list');
 
 const popupWithAddCard = new PopupWithForm(POPUP_SETTINGS, POPUP_SELECTORS.type.add, values => {
   newCardHandler(values, popupWithAddCard, cardList, popupWithImage, popupWithDeleteCard);
@@ -80,13 +74,10 @@ function init() {
       });
       userInfo.id = user._id;
 
-      cardList.setItems(initialCards);
+      cardList.render(initialCards);
     })
     .catch(e => {
       console.error(`Ошибка: ${e.message}`);
-    })
-    .finally(() => {
-      cardList.render();
     });
 }
 
