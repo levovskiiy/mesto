@@ -45,7 +45,7 @@ const popupWithProfileValidator = new FormValidator(FORMS.editProfile, FORM_SETT
 popupWithProfileValidator.enableValidation();
 
 const popupWithReplaceAvatar = new PopupWithForm(POPUP_SETTINGS, POPUP_SELECTORS.type.replaceAvatar, newAvatar =>
-  setAvatar(popupWithReplaceAvatar, newAvatar.link_avatar)
+  setAvatar(popupWithReplaceAvatar, newAvatar.linkAvatar)
 );
 
 const popupWithReplaceAvatarValidator = new FormValidator(FORMS.replaceAvatar, FORM_SETTINGS);
