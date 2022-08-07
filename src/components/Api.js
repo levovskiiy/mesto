@@ -18,9 +18,13 @@ export default class Api {
       method,
       body,
       headers: { ...this._headers, ...headers },
-    })
-      .then(response => response.json())
-      .catch(err => err);
+    }).then(response => {
+      if (response.ok) {
+        return response.json();
+      }
+
+      throw new Error(`Запрос завершился с ошибкой. Статус ошибки - ${response.status}`);
+    });
   }
 
   /**
@@ -64,7 +68,7 @@ export default class Api {
    * @param {Card} card
    * @returns {Promise<Object>}
    */
-  newCard(card) {
+  postCard(card) {
     return this._request({
       path: 'cards',
       method: 'POST',
