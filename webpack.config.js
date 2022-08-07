@@ -30,6 +30,9 @@ module.exports = {
 
   resolve: {
     alias: {
+      blocks: path.resolve(__dirname, 'src/blocks'),
+      icons: path.resolve(__dirname, 'src/icons'),
+      images: path.resolve(__dirname, 'src/images'),
       components: path.resolve(__dirname, 'src/components'),
       utils: path.resolve(__dirname, 'src/utils'),
     },

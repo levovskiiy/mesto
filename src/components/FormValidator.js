@@ -5,24 +5,16 @@ export default class FormValidator {
    * @param {object} formSettings
    * @param {string} inputSelector - селектор поля ввода формы
    * @param {string} submitButtonSelector - селектор кнопки отправки формы
-   * @param {string} inactiveButtonClass - класс неактивной кнопки
    * @param {string} inputErrorClass - класс для ошибки поля ввода
    * @param {string} errorClass - класс для подсказки ошибки
    */
   constructor(
     form,
-    {
-      inputSelector,
-      submitButtonSelector,
-      inactiveButtonClass,
-      inputErrorClass,
-      errorClass,
-    }
+    { inputSelector, submitButtonSelector, inputErrorClass, errorClass }
   ) {
     this._formElement = form;
     this._inputSelector = inputSelector;
     this._submitButtonSelector = submitButtonSelector;
-    this._inactiveButtonClass = inactiveButtonClass;
     this._inputErrorClass = inputErrorClass;
     this._errorClass = errorClass;
     this._inputList = Array.from(
@@ -47,13 +39,7 @@ export default class FormValidator {
    * @private
    */
   _toggleStateButton() {
-    if (this._hasInvalidInput()) {
-      this._buttonElement.classList.add(this._inactiveButtonClass);
-      this._buttonElement.disabled = true;
-    } else {
-      this._buttonElement.classList.remove(this._inactiveButtonClass);
-      this._buttonElement.disabled = false;
-    }
+    this._buttonElement.disabled = this._hasInvalidInput();
   }
 
   /**

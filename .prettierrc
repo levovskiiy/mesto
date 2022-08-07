@@ -3,5 +3,6 @@
   "arrowParens": "avoid",
   "bracketSpacing": true,
   "semi": true,
-  "singleQuote": true
+  "singleQuote": true,
+  "printWidth": 120
 }

@@ -28,4 +28,8 @@ export default class Section {
   prepend(item) {
     this._container.prepend(item);
   }
+
+  setItems(newItems) {
+    this._items = newItems;
+  }
 }
