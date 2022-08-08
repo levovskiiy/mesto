@@ -46,7 +46,7 @@ module.exports = {
     compress: true,
     hot: isDev,
     port: 8080,
-    open: true,
+    open: false,
   },
 
   module: {

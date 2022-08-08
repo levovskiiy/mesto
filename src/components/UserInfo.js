@@ -27,6 +27,10 @@ export default class UserInfo {
     this._userAvatar.src = newAvatar;
   }
 
+  get avatar() {
+    return this._userAvatar;
+  }
+
   set id(newId) {
     if (typeof newId !== 'string') {
       throw new Error('Передайте id в виде строки');

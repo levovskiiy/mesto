@@ -8,7 +8,7 @@
 
 @import url('blocks/content/__profile/content__profile.css');
 @import url('blocks/content/__photo-grid/content__photo-grid.css');
-
+@import url('blocks/loading/loading.css');
 /* ====== HEADER SECTION ====== */
 @import url('blocks/header/header.css');
 @import url('blocks/header/__logo/header__logo.css');

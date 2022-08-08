@@ -13,6 +13,7 @@ import { addButton, editButton, replaceAvatarButton, userInfo, editProfile } fro
 import api from 'utils/api';
 import setAvatar from 'utils/setAvatar';
 import { createCard, deleteCard, newCardHandler } from 'utils/cardHandlers';
+import Loading from 'components/Loading';
 
 const popupWithImage = new PopupWithImage(POPUP_SELECTORS, POPUP_SELECTORS.type.photo);
 const popupWithDeleteCard = new PopupWithDeleteCard(POPUP_SELECTORS.classes, POPUP_SELECTORS.type.deleteCard, card =>
@@ -54,6 +55,10 @@ function setPopupListeners() {
 }
 
 function init() {
+  const loadingCardList = new Loading('.card-list');
+  const loadingAvatar = new Loading('.profile__avatar');
+  loadingCardList.show();
+  loadingAvatar.show();
   api
     .getData()
     .then(result => {
@@ -72,12 +77,17 @@ function init() {
         description: user.about,
         avatar: user.avatar,
       });
+
       userInfo.id = user._id;
 
       cardList.render(initialCards);
     })
     .catch(e => {
       console.error(`Ошибка: ${e.message}`);
+    })
+    .finally(() => {
+      loadingCardList.hidden();
+      loadingAvatar.hidden();
     });
 }
 
@@ -89,6 +99,7 @@ function app() {
     popupWithProfile.open(userInfo.getUserInfo());
     popupWithProfileValidator.initialState();
   });
+
   addButton.addEventListener('click', () => {
     popupWithAddCard.open();
     popupWithAddCardValidator.initialState();
